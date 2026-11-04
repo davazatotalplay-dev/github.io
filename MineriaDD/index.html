@@ -1,698 +1,289 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minería de Datos</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/c3/c3.min.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
-    <link rel="stylesheet" href="jqwidgets/styles/jqx.ui-smoothness.css" type="text/css" />
-    <link rel="shortcut icon" href="/MineriaDD/img/tp_triangulo.png" />
-
-    <script src="js/c3/d3-5.8.2.min.js" charset="utf-8"></script>
-    <script src="js/c3/c3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxcheckbox.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxdata.export.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxexport.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxdatatable.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxmenu.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxgrid.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxgrid.selection.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxdropdownlist.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxgrid.pager.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxgrid.filter.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxgrid.sort.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxgrid.columnsresize.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxrating.js"></script>
-    <script type="text/javascript" src="jqwidgets/globalization/globalize.js"></script>
-    <script type="text/javascript" src="jqwidgets/jqxgrid.export.js"></script>
-    <script type="text/javascript" src="scripts/jszip.min.js"></script>
-    <!-- <script type="text/javascript" src="scripts/demos.js"></script> -->
-    <!-- <script type="text/javascript" src="js/generatedata.js"></script> -->
-    <script type="text/javascript" src="js/localization.js"></script>
-    <!-- <script type="text/javascript" src="js/tabla.js"></script> -->
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minería de Datos</title>
+<link rel="shortcut icon" href="img/tp_triangulo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--ink:#0E2A47;--muted:#5B6B7F;--blue:#1F5FA8;--bg:#EDF1F6;--card:#fff;--line:#D8E0EA;--good:#1E7F4F;--bad:#B3263E;--focus:#E08A1E}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Public Sans",system-ui,Segoe UI,Arial,sans-serif}
+.top{background:#fff;display:flex;align-items:center;gap:20px;padding:10px 24px;border-bottom:1px solid var(--line)}
+.top img{height:52px}
+.top .t{flex:1}
+.top h1{margin:0;font-size:20px}
+.top p{margin:0;color:var(--muted);font-size:13px}
+.tabs{background:var(--ink);display:flex;gap:4px;padding:0 24px}
+.tabs button{background:none;border:0;color:#B9C8DA;font:600 14px inherit;font-family:inherit;padding:13px 18px;cursor:pointer;border-bottom:3px solid transparent}
+.tabs button[aria-selected=true]{color:#fff;border-color:var(--focus)}
+.tabs button:hover{color:#fff}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:10px 24px;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:end}
+.f{display:flex;flex-direction:column;gap:3px;min-width:170px}
+.f label,.seg-l{font-size:12px;color:var(--muted);font-weight:600}
+select{font:inherit;padding:7px 10px;border:1px solid #BCC8D6;border-radius:6px;background:#fff;color:var(--ink)}
+select:disabled{background:#F2F5F9;color:#9AA7B6}
+.seg{display:inline-flex;border:1px solid #BCC8D6;border-radius:6px;overflow:hidden}
+.seg button{border:0;background:#fff;font:600 13px inherit;font-family:inherit;color:var(--ink);padding:8px 12px;cursor:pointer}
+.seg button+button{border-left:1px solid #BCC8D6}
+.seg button[aria-pressed=true]{background:var(--blue);color:#fff}
+:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+.sp{flex:1}
+main{padding:18px 24px 40px;max-width:1600px;margin:0 auto}
+.scope{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+.scope h2{margin:0;font-size:26px}
+.scope span{color:var(--muted);font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px;border-top:4px solid var(--c)}
+.kpi b{display:block;font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi small{color:var(--muted);font-weight:600}
+.kpi i{display:block;font-style:normal;font-size:12.5px;margin-top:2px;font-variant-numeric:tabular-nums}
+.up{color:var(--bad)}.dn{color:var(--good)}.eq{color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.card h3{margin:0 0 2px;font-size:16px}
+.card .sub{margin:0 0 8px;color:var(--muted);font-size:13px}
+.hd{display:flex;justify-content:space-between;align-items:start;gap:10px}
+.cv{position:relative;height:320px}
+.cv.tall{height:560px}
+.note{display:grid;place-items:center;height:320px;color:var(--muted);text-align:center;padding:0 20px}
+.err{background:#FCEBEC;border:1px solid #E7B4BA;color:#7A1A28;padding:10px 14px;border-radius:8px;margin-bottom:14px}
+.busy{opacity:.5;transition:opacity .15s}
+[hidden]{display:none!important}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}.top img{height:38px}.top h1{font-size:16px}main,.bar,.top,.tabs{padding-left:12px;padding-right:12px}.f{min-width:46%;flex:1}}
+@media(prefers-reduced-motion:reduce){.busy{transition:none}}
+</style>
 </head>
-
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid menuPrincipal">
+<header class="top">
+  <img src="img/LOGO_TP_Residencial.jpg" alt="Totalplay">
+  <div class="t"><h1>Minería de Datos</h1><p id="upd">Cargando datos…</p></div>
+  <img src="img/CONECTA_MAS.png" alt="Conecta Más">
+</header>
 
-            <a class="navbar-brand" href="#">
-                <img src="img/LOGO_TP_Residencial.jpg" style="height: 70px;" />
-            </a>
+<nav class="tabs" role="tablist" aria-label="Vistas">
+  <button role="tab" data-v="ind" aria-selected="true">Indicadores de operación</button>
+  <button role="tab" data-v="inc" aria-selected="false">Top incumplimiento</button>
+  <button role="tab" data-v="top" aria-selected="false">Top del día</button>
+</nav>
 
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<section class="bar" aria-label="Filtros">
+  <div class="f"><label for="fDir">Dirección</label><select id="fDir"></select></div>
+  <div class="f lvl"><label for="fReg">Región</label><select id="fReg"></select></div>
+  <div class="f lvl"><label for="fPla">Plaza</label><select id="fPla"></select></div>
+  <div class="f lvl"><label for="fDis">Distrito</label><select id="fDis"></select></div>
+  <div class="sp"></div>
+  <div class="f only-ind"><span class="seg-l">Periodo</span>
+    <div class="seg" id="segP"><button data-p="30" aria-pressed="true">30 días</button><button data-p="90" aria-pressed="false">90 días</button><button data-p="9999" aria-pressed="false">Todo</button></div>
+  </div>
+</section>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <div class="nombreMenu" id="mas72hrs">
-                                <strong class="textoMenu">Indicadores de Operación</strong>
-                            </div>
-                        </a>
-                    </li>
+<main id="main">
+  <div class="err" id="err" hidden></div>
+  <div class="scope"><h2 id="scopeT">Nacional</h2><span id="scopeS"></span></div>
 
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <div class="nombreMenu" id="backlog">
-                                <strong class="textoMenu">Backlog</strong>
-                            </div>
-                        </a>
-                    </li> -->
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="nombreMenu" id="incumplimiento">
-                                <strong class="textoMenu">Top Incumplimiento</strong>
-                            </div>
-                        </a>
-
-                        <!-- <ul class="dropdown-menu listaRein" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#" id="incumIndicador">Indicador</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#" id="incumTop">Top Semanal</a></li>
-                        </ul> -->
-
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <div class="nombreMenu" id="top">
-                                <strong class="textoMenu">Top del día</strong>
-                            </div>
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item" style="display:none;">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            <div class="nombreMenu" id="productividad">
-                                <strong class="textoMenu">Desempeño Cuadrillas PI</strong>
-                            </div>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="nav-item dropdown" style="display:none;">
-
-                        <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="nombreMenu" id="reincidencias">
-                                <strong class="textoMenu">Reincidencias</strong>
-                            </div>
-                        </a>
-
-                        <ul class="dropdown-menu listaRein" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#" id="porTecnico">Por técnico</a></li>
-
-                        </ul>
-
-                    </li>
-                    
-                </ul>
-
-                <form class="d-flex">
-                    <img src="img/CONECTA_MAS.png" alt="conecta_mas" style="height: 70px;" id="imgConecta">
-                </form>
-
-            </div>
-
-        </div>
-    </nav>
-
-    <br>
-
-    <div class="row mb-3" id="divReinTitulo">
-        <div class="col-lg-12 col-md-12 col-sm-6 text-center">
-            <label class="tituloGris" id="tituloReincidencias" style="font-size: large;"></label>
-        </div>
+  <div id="v-ind">
+    <div class="kpis" id="kpis"></div>
+    <div class="grid2">
+      <article class="card"><h3>Backlog</h3><p class="sub">Órdenes abiertas por día</p><div class="cv"><canvas id="cBL"></canvas></div></article>
+      <article class="card"><h3>Tickets con más de 72 horas</h3><p class="sub">Disponible a nivel Nacional y Dirección</p>
+        <div class="cv" id="w72"><canvas id="c72"></canvas></div>
+        <div class="note" id="n72" hidden>Este indicador no se calcula por región, plaza ni distrito. Selecciona una Dirección o Nacional.</div></article>
     </div>
+    <article class="card">
+      <div class="hd"><div><h3>Incumplimientos</h3><p class="sub">Por tipo de orden</p></div>
+        <div class="seg" id="segT"><button data-t="DIARIA" aria-pressed="true">Diaria</button><button data-t="SEMANA" aria-pressed="false">Semanal</button></div></div>
+      <div class="cv"><canvas id="cInc"></canvas></div>
+    </article>
+  </div>
 
-    <div class="row">
-
-        <div id="desDireccion" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 ">
-                    <label id="labelZona" for="opcDireccion">&nbsp;&nbsp;&nbsp;Dirección</label>
-                </div>
-                <div class="col-md-9 col-sm-12">
-                    <form>
-                        <select name="opcDireccion" id="opcDireccion" class="form-control-select" style="width: 300px; margin-right: 20px;">
-                            <option selected>NACIONAL</option>
-                            <option>BAJIO</option>
-                            <option>CENTRO 1</option>
-                            <option>CENTRO 2</option>
-                            <option>NORESTE-FRONTERA</option>
-                            <option>NORTE</option>
-                            <option>OCCIDENTE</option>
-                            <option>ORIENTE</option>
-                            <option>SURESTE</option>
-                            <option>PACIFICO</option>
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="desRegionPlaza" class="col-md-4 col-sm-12">
-            <div class="row ">
-                <div class="col-md-3 col-sm-12 text-center">
-                    <label>&nbsp;Seleccionar:</label>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="segmentacion" id="region" value="region" checked>
-                        <label class="form-check-label etiqueta" for="region">Región</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="segmentacion" id="plaza" value="plaza">
-                        <label class="form-check-label etiqueta" for="plaza">Plaza</label>
-                    </div>
-                </div>
-                <div class="col-md-5 col-sm-12">
-                    <form>
-                        <select name="opcRegionPlaza" id="opcRegionPlaza" class="form-control-select" style="width: 250px; margin-right: 20px;">
-                            <option selected disabled>Seleccionar</option>
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="desPlaza" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 ">
-                    <label for="opcPlaza" id="lblOpcPlaza">&nbsp;&nbsp;&nbsp;Plaza</label>
-                </div>
-                <div class="col-md-9 col-sm-12">
-                    <form>
-                        <select name="opcPlaza" id="opcPlaza" class="form-control-select" style="width: 300px; margin-right: 20px;">
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="desDistrito" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 text-center">
-                    <label for="opcDistrito">&nbsp;&nbsp;Distrito</label>
-                </div>
-                <div class="col-md-9 col-sm-12">
-                    <form>
-                        <select name="opcDistrito" id="opcDistrito" class="form-control-select">
-                            <option selected disabled>Seleccionar</option>
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- <div id="desDistrito" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div class="col-md-2 col-sm-12 ">
-                    <label for="opcDistrito">&nbsp;&nbsp;&nbsp;Distrito</label>
-                </div>
-                <div class="col-md-10 col-sm-12">
-                    <form>
-                        <select name="opcDistrito" id="opcDistrito" class="form-control-select" style="width: 300px; margin-right: 20px;">
-
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div> -->
-
+  <div id="v-inc" hidden>
+    <div class="grid2">
+      <article class="card"><h3 id="tPeor"></h3><p class="sub" id="sPeor"></p><div class="cv tall"><canvas id="cPeor"></canvas></div></article>
+      <article class="card"><h3 id="tMejor"></h3><p class="sub" id="sMejor"></p><div class="cv tall"><canvas id="cMejor"></canvas></div></article>
     </div>
+  </div>
 
-    <div id="kpiTodos" class="row">
-
-        <div id="desKpiDireccion" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div id="kpiDireccion" class="col-md-12 col-sm-4">
-
-                </div>
-            </div>
-        </div>
-
-        <div id="desKpiRegion" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div id="kpiRegion" class="col-md-12 col-sm-4">
-
-                </div>
-            </div>
-        </div>
-
-        <div id="desKpiDistrito" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div id="kpiDistrito" class="col-md-12 col-sm-4">
-
-                </div>
-            </div>
-        </div>
-
+  <div id="v-top" hidden>
+    <div class="grid2">
+      <article class="card"><h3 id="tTB"></h3><p class="sub" id="sTB"></p><div class="cv tall"><canvas id="cTB"></canvas></div></article>
+      <article class="card"><h3 id="tTI"></h3><p class="sub" id="sTI"></p><div class="cv tall"><canvas id="cTI"></canvas></div></article>
     </div>
-
-    <div class="row mt-3" id="segundoNivel">
-
-        <div id="desSupervisor" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 ">
-                    <label id="labelZona" for="opcSupervisor">&nbsp;&nbsp;&nbsp;Supervisor</label>
-                </div>
-                <div class="col-md-9 col-sm-12">
-                    <form>
-                        <select name="opcSupervisor" id="opcSupervisor" class="form-control-select" style="width: 300px; margin-right: 20px;">
-                            <option selected disabled>Seleccionar</option>
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="desTarjeta" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 ">
-                    <label for="opcTarjeta">&nbsp;&nbsp;&nbsp;Tarjeta</label>
-                </div>
-                <div class="col-md-9 col-sm-12">
-                    <form>
-                        <select name="opcTarjeta" id="opcTarjeta" class="form-control-select" style="width: 300px; margin-right: 20px;">
-                            <option value="todo" selected>Listado completo</option>
-                            <option value="amarilla">Amarilla</option>
-                            <option value="naranja">Naranja</option>
-                            <option value="morada">Morada</option>
-                            <option value="roja">Roja</option>
-                            <option value="sinTarjeta">Sin Tarjeta</option>
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="desSemana" class="col-md-4 col-sm-12">
-
-                <div class="col-md-1 col-sm-12 d-inline">
-                    <label>&nbsp;&nbsp;&nbsp;Semana:</label>
-                </div>
-
-                <div class="col-md-11 col-sm-12 d-inline" style="margin-left: 10px;">
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="semActual" value="semActual" disabled checked>
-                        <label class="form-check-label etiqueta" for="semActual" id="numSemActual"></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="semM2" value="semM2">
-                        <label class="form-check-label etiqueta" for="semM2" id="numSemM2"></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="semM3" value="semM3">
-                        <label class="form-check-label etiqueta" for="semM3" id="numSemM3"></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="semM4" value="semM4">
-                        <label class="form-check-label etiqueta" for="semM4" id="numSemM4"></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="semM5" value="semM5">
-                        <label class="form-check-label etiqueta" for="semM5" id="numSemM5"></label>
-                    </div>
-
-                </div>
-
-        </div>
-
-    </div>
-
-    <div id="kpiSegundoNivel" class="row">
-
-        <div id="desKpiSupervisor" class="col-md-4 col-sm-12">
-            <div class="row">
-                <div id="kpiSupervisor" class="col-md-12 col-sm-4">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-12">
-
-        </div>
-
-        <div class="col-md-4 col-sm-12">
-
-        </div>
-
-    </div>
-
-    <div class="row" id="divAct">
-        <div class="col-lg-12 col-md-12 col-sm-6" style="text-align: right;">
-            <label class="tituloGris" id="ultActualizacion"></label>
-
-        </div>
-    </div>
-
-    <hr>
-
-    <div class="col-md-12 col-sm-12" id="divGrafica">
-        <div id="graficas" class="row">
-            <div class="col-md-11 col-sm-12">
-                <div id="grafica1" style="text-align: center; height: 300px; margin-right: 20px;">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-12 col-md-12 col-sm-6" id="divTabla">
-        <div class="row mb-2 mr-3" id="divAct">
-            <div class="col-lg-12 col-md-12 col-sm-6" style="text-align: right;">
-                <input type="button" value="Excel" id="btnExcel" class="btn btn-outline-primary" />
-            </div>
-        </div>
-        <div id="tabla" class="row">
-            <div class="col-md-12 col-sm-6" style="text-align: center;">
-                <div id="contenidoTabla" style="display: inline-flex;"></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="tablaReincidencias" class="container align-items-center w-100 mt-3">
-
-        <div class="row pb-3">
-            <div class="col-lg-10 col-md-10 col-sm-6">
-                <div class="input-group">
-                    <span class="input-group-text bg-buscar">Buscar</span>
-                    <div class="form-floating w-35">
-                        <input type="search" class="form-control" id="distrito" placeholder="distrito">
-                        <label for="distrito">Distrito</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-10 col-md-10 col-sm-6">
-                <div class="table-responsive">
-                    <table class="table table-hover table-sm table-bordered" style="font-size: small;">
-                        <thead id="titulo_tabla">
-
-                        </thead>
-                        <tbody id="contenido_tabla">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-md-12 col-sm-12" id="divGrafReincidencias">
-        <div id="graficasReincidencias" class="row">
-
-            <!-- Gráfica TR Mensual -->
-            <div class="col-md-12 col-sm-12" style="text-align: center;">
-
-                <div class="row mb-3">
-                    <div class="col-lg-12 col-md-12 col-sm-6 text-center">
-                        <label class="tituloGris" style="font-size: large;">Ticket Repetido</label>
-                    </div>
-                </div>
-                <div id="grafica3" class="tamanhoGrafica">
-
-                </div>
-            </div>
-
-            <!-- Gráfica IDR Mensual -->
-            <div class="col-md-12 col-sm-12 mt-4" style="text-align: center;">
-
-                <div class="row mb-3">
-                    <div class="col-lg-12 col-md-12 col-sm-6 text-center">
-                        <label class="tituloGris" style="font-size: large;">Índice de Reincidencias</label>
-                    </div>
-                </div>
-                <div id="grafica22" class="tamanhoGrafica">
-
-                </div>
-            </div>
-
-        </div>
-
-        <!-- <br> -->
-
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 text-center">
-                <label class="tituloGris" style="font-size: small;">
-                    Niveles IDR: &nbsp;&nbsp;Bueno (√) = Menor a 0.7%, &nbsp;&nbsp;Regular (!) = Entre 0.7% y 1.3%, &nbsp;&nbsp;Malo (x) = Mayor a 1.3%.
-                </label>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-md-12 col-sm-12" id="divIndicadoresOperacion">
-        <div id="graficasAutomatica" class="row">
-
-            <!-- Gráfica BL -->
-            <div class="col-md-12 col-sm-12" style="text-align: center;">
-                <strong>
-                    <label id="lblgrafica1BL" for="grafica1BL">Backlog</label>
-                </strong>
-
-                <hr>
-                <!-- Listado de BL Temporalidad-->
-                <!--<div class="row mt-3" id="nivelPeriodicidad">
-
-                    <div id="periodicidad" class="col-md-4 col-sm-12">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-12 ">
-                                <label for="opcPeriodicidad">&nbsp;&nbsp;&nbsp;Periodicidad</label>
-                            </div>
-                            <div class="col-md-2 col-sm-12">
-                                <form>
-                                    <select name="opcPeriodicidad" id="opcPeriodicidad" class="form-control-select" style="width: 180px; margin-left: 65px;margin-top: 0px;">
-                                        <option value="general" selected>General</option>
-                                        <option value="pasado">Pasado</option>
-                                        <option value="presente">Hoy</option>
-                                        <option value="futuro">Futuro</option>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>-->
-
-                <div id="grafica1BL" class="tamanhoGrafica">
-
-                </div>
-
-            </div>
-
-            <!-- Gráfica 72hrs -->
-            <div class="col-md-12 col-sm-12 mt-5" style="text-align: center;">
-                <strong>
-                    <label id="lblgrafica272" for="grafica272">Tickets más de 72 horas</label>
-                </strong>
-
-                <hr>
-                <!-- style="height: 478px;"-->
-                <div id="grafica272" class="tamanhoGrafica">
-
-                </div>
-
-            </div>
-
-            <!-- Gráfica Incumplimientos -->
-            <div class="col-md-12 col-sm-12 mt-5" style="text-align: center;">
-
-                <strong>
-                    <label id="lblgrafica3Incum" for="grafica3Incum">Incumplimientos</label>
-                </strong>
-
-                <hr>
-
-                <div id="divTemporalidad" class="row">
-
-                    <div class="col-md-2 col-sm-12" style="margin-left: 10px;">
-                        <fieldset>
-
-                            <legend>Temporalidad</legend>
-
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="temporalidad" id="semanal" value="semanal">
-                                <label class="form-check-label etiqueta" for="semanal">Semanal</label>
-                            </div>
-
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="temporalidad" id="diaria" value="diaria" checked>
-                                <label class="form-check-label etiqueta" for="diaria">Diaria</label>
-                            </div>
-
-                        </fieldset>
-                    </div>
-
-                    <div class="col-md-4 col-sm-12" style="visibility: hidden;">
-
-                        <div class="form-check form-switch form-check-inline" style="margin-top: 15px;">
-                            <input class="form-check-input" type="checkbox" id="inputConfirmacion" checked>
-                            <label class="form-check-label" for="inputConfirmacion">Llamadas administrativas</label>
-                        </div>
-
-                        <div class="form-check form-switch form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inputIncumplimientos" checked>
-                            <label class="form-check-label" for="inputIncumplimientos">Incumplimientos</label>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div id="grafica3Incum" style="text-align: center; height: 400px; margin-right: 20px;">
-
-                </div>
-
-            </div>
-
-            <!-- Gráfica AA
-            <div class="col-md-12 col-sm-12 mt-5" style="text-align: center;"">
-
-                <strong>
-                    <label id=" lblgrafica4AA" for="grafica4AA">Asignación Automática</label>
-                </strong>
-
-                <hr>
-
-                <div id="grafica4AA" class="tamanhoGrafica">
-
-                </div>
-
-            </div> -->
-
-            <!-- Gráfica AM
-            <div class="col-md-12 col-sm-12 mt-5" style="text-align: center;">
-
-                <strong>
-                    <label id="lblgrafica5AM" for="grafica5AM">Activación Manual</label>
-                </strong>
-
-                <hr>
-                <div id="grafica5AM" class="tamanhoGrafica">
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <br> -->
-
-    <!-- Modal Listado Técnicos-->
-    <div class="modal fade" id="listaTecnicos" tabindex="-1" aria-labelledby="listaTecnicosLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="listaTecnicosLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-6">
-                            <div>
-                                <table class="table table-hover table-sm table-bordered" style="font-size: small;">
-                                    <thead>
-                                        <tr class='thead-active'>
-                                            <th scope="col" style="width: 100px;" class='align-middle'>#Técnico</th>
-                                            <th scope="col" style="width: 400px;">Nombre Técnico</th>
-                                            <th id="s0" scope="col" style="width: 100px;" class='align-middle'></th>
-                                            <th id="s1" scope="col" style="width: 100px;" class='align-middle'></th>
-                                            <th id="s2" scope="col" style="width: 100px;" class='align-middle'></th>
-                                            <th id="s3" scope="col" style="width: 100px;" class='align-middle'></th>
-                                            <th id="s4" scope="col" style="width: 100px;" class='align-middle'></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="listTecnicos">
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Listado OS por Técnico-->
-    <div class="modal fade" id="listaOS" tabindex="-1" aria-labelledby="listaOSLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="listaOSLabel"></h5>
-                </div>
-                <div class="modal-body">
-                    <h6 class="modal-title" id="tecnicoLabel"></h6>
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-6">
-                            <div>
-                                <table class="table table-hover table-sm table-bordered" style="font-size: small;">
-                                    <thead>
-                                        <tr class='thead-active'>
-                                            <th scope="col" style="width: 200px;" class='align-middle'>OS REINCIDENTE</th>
-                                            <th scope="col" style="width: 250px;">TIPO OS</th>
-                                            <th scope="col" style="width: 250px;">DÍAS REINCIDENCIA</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="listOS">
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
-                        data-bs-target="#listaTecnicos">Regresar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="js/desempenio.js"></script> 
-    <script src="js/plazasRegiones.js"></script>
-    <script src="js/graficas.js"></script>
-    <script src="js/reincidencias.js"></script>
-    <script src="js/tempIncumplimiento.js"></script>
-    <script src="js/incumplimiento.js"></script>
-
+  </div>
+</main>
+
+<script>
+const F = 'fuentes/', $ = s => document.querySelector(s), cache = {}, charts = {};
+const C = {Soportes:'#1F5FA8', Instalaciones:'#E08A1E', Recolecciones:'#6B7A90', CDD:'#2A9D8F', Addon:'#8E4FB8', CDE:'#C2453A'};
+const INC = [['Soporte','#1F5FA8'], ['Instalación','#E08A1E'], ['Cambio de domicilio','#2A9D8F'], ['Adicionales','#8E4FB8']];
+let H = [], view = 'ind', period = 30, temp = 'DIARIA', lastBL = '', lastInc = '';
+
+Chart.defaults.font.family = '"Public Sans",system-ui,sans-serif';
+Chart.defaults.color = '#5B6B7F';
+
+const num = v => (v === undefined || v === '' || v === 'NA' || v === '-') ? null : +v;
+const nf = n => n == null ? '—' : n.toLocaleString('es-MX');
+const sum = a => a.reduce((x, y) => x + y, 0);
+const uniq = (a, k) => [...new Set(a.map(r => r[k]))].filter(Boolean).sort();
+const fmtD = d => { const [y, m, dd] = d.split('-'); return new Date(+y, m - 1, +dd).toLocaleDateString('es-MX', {day:'numeric', month:'short'}).replace('.', ''); };
+const fmtL = d => d.includes('-') && d.length === 10 ? fmtD(d) : 'Sem ' + d.split('-')[1];
+
+async function csv(name) {
+  if (!cache[name]) {
+    const r = await fetch(F + name);
+    if (!r.ok) throw new Error('No se pudo leer ' + F + name);
+    const L = (await r.text()).trim().split(/\r?\n/), h = L[0].split(',').map(s => s.trim());
+    cache[name] = L.slice(1).map(l => { const c = l.split(','), o = {}; h.forEach((k, i) => o[k] = (c[i] || '').trim()); return o; });
+    cache[name].h = h;
+  }
+  return cache[name];
+}
+
+// ---------- filtros en cascada (Dirección > Región > Plaza > Distrito) ----------
+function fill(sel, vals, ph) { sel.innerHTML = '<option value="">' + ph + '</option>' + vals.map(v => '<option>' + v + '</option>').join(''); sel.disabled = !vals.length; }
+const rows = () => H.filter(r => (!$('#fDir').value || r.DIRECCION === $('#fDir').value) && (!$('#fReg').value || r.REGION === $('#fReg').value) && (!$('#fPla').value || r.PLAZA === $('#fPla').value));
+function cascade(from) {
+  const nat = !$('#fDir').value;
+  if (from === 'dir') { $('#fReg').value = ''; $('#fPla').value = ''; $('#fDis').value = ''; }
+  if (from === 'reg') { $('#fPla').value = ''; $('#fDis').value = ''; }
+  if (from === 'pla') { $('#fDis').value = ''; }
+  const dir = nat ? [] : rows();
+  if (from === 'dir') fill($('#fReg'), uniq(dir, 'REGION'), 'Todas');
+  if (from === 'dir' || from === 'reg') fill($('#fPla'), uniq(dir.filter(r => !$('#fReg').value || r.REGION === $('#fReg').value), 'PLAZA'), 'Todas');
+  fill($('#fDis'), uniq(dir.filter(r => (!$('#fReg').value || r.REGION === $('#fReg').value) && (!$('#fPla').value || r.PLAZA === $('#fPla').value)), 'DISTRITO'), 'Todos');
+  render();
+}
+function scope() {
+  const d = $('#fDir').value, r = $('#fReg').value, p = $('#fPla').value, s = $('#fDis').value;
+  if (s) return {lvl:'DISTRITO', name:s, bl:'Backlog_Distritos.csv', key:'DISTRITO'};
+  if (p) return {lvl:'PLAZA', name:p, bl:'Backlog_Plazas.csv', key:'PLAZA'};
+  if (r) return {lvl:'REGION', name:r, bl:'Backlog_Regiones.csv', key:'REGION'};
+  if (d && d !== 'NACIONAL') return {lvl:'DIRECCION', name:d, bl:'Backlog_Direcciones.csv', key:'DIRECCION', f72:'Backlog_72hs_Direcciones.csv'};
+  return {lvl:'NACIONAL', name:'NACIONAL', bl:'Backlog_Nacional.csv', f72:'Backlog_72hrs_Nacional.csv'};
+}
+
+// ---------- gráficas ----------
+function draw(id, cfg) { if (charts[id]) charts[id].destroy(); charts[id] = new Chart($('#' + id), cfg); }
+const base = {responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false}, plugins:{legend:{position:'bottom', labels:{usePointStyle:true, boxWidth:8}}}};
+const grid = {color:'#E6ECF3'};
+
+function lineChart(id, labels, series) {
+  draw(id, {type:'line', data:{labels, datasets:series.map(s => ({label:s.n, data:s.d, borderColor:s.c, backgroundColor:s.c, borderWidth:2, pointRadius:labels.length > 45 ? 0 : 3, tension:.25, spanGaps:true}))},
+    options:{...base, scales:{y:{beginAtZero:true, grid}, x:{grid:{display:false}, ticks:{maxTicksLimit:10}}}}});
+}
+function stackH(id, data, labelKey, fields, colors, n) {
+  const r = data.map(x => ({l:x[labelKey], v:fields.map(f => num(x[f]) || 0)})).sort((a, b) => sum(b.v) - sum(a.v)).slice(0, n);
+  draw(id, {type:'bar', data:{labels:r.map(x => x.l), datasets:fields.map((f, i) => ({label:f, data:r.map(x => x.v[i]), backgroundColor:colors[i]}))},
+    options:{...base, indexAxis:'y', scales:{x:{stacked:true, grid}, y:{stacked:true, grid:{display:false}}},
+      plugins:{...base.plugins, tooltip:{callbacks:{footer:it => 'Total: ' + sum(it.map(i => i.parsed.x))}}}}});
+}
+function compareH(id, data, a, b, color) {
+  draw(id, {type:'bar', data:{labels:data.map(r => r.DISTRITO), datasets:[
+      {label:b.replace('Semana', 'Semana '), data:data.map(r => num(r[b])), backgroundColor:'#A9BACD'},
+      {label:a.replace('Semana', 'Semana '), data:data.map(r => num(r[a])), backgroundColor:color}]},
+    options:{...base, indexAxis:'y', scales:{x:{beginAtZero:true, grid}, y:{grid:{display:false}}},
+      plugins:{...base.plugins, tooltip:{callbacks:{afterBody:it => { const r = data[it[0].dataIndex]; return 'Diferencia: ' + (num(r.Diferencia) > 0 ? '+' : '') + r.Diferencia; }}}}}});
+}
+
+// ---------- vistas ----------
+function kpi(label, val, prev, color, unit) {
+  const d = prev == null || val == null ? null : val - prev;
+  const t = d == null ? '' : d === 0 ? '<i class="eq">Sin cambio vs día anterior</i>' : '<i class="' + (d > 0 ? 'up' : 'dn') + '">' + (d > 0 ? '▲ +' : '▼ ') + nf(d) + ' vs día anterior</i>';
+  return '<div class="kpi" style="--c:' + color + '"><small>' + label + '</small><b>' + nf(val) + '</b>' + t + '</div>';
+}
+
+async function rInd() {
+  const S = scope();
+  const [bl, b72, inc] = await Promise.all([csv(S.bl), S.f72 ? csv(S.f72) : null, csv('IncumplimientosFull.csv')]);
+  const date = r => r.Fecha_Descarga || r.Fecha;
+  const get = (d, key) => d.filter(r => !S.key || r[S.key] === S.name).sort((a, b) => date(a) < date(b) ? -1 : 1);
+  const all = get(bl, S.key), cut = all.slice(-period), labels = cut.map(r => fmtD(date(r)));
+  const names = ['Soportes', 'Instalaciones', 'Recolecciones', 'CDD', 'Addon', 'CDE'].filter(n => all.some(r => num(r[n]) != null));
+  lineChart('cBL', labels, names.map(n => ({n, c:C[n], d:cut.map(r => num(r[n]))})));
+
+  const last = all[all.length - 1] || {}, prev = all[all.length - 2] || {};
+  let k = names.map(n => kpi(n, num(last[n]), num(prev[n]), C[n]));
+
+  $('#w72').hidden = !S.f72; $('#n72').hidden = !!S.f72;
+  if (S.f72) {
+    const r72 = get(b72, 'DIRECCION').slice(-period), g = (r, n) => num(r[n] !== undefined ? r[n] : r[n.toUpperCase()]);
+    lineChart('c72', r72.map(r => fmtD(date(r))), ['Soportes', 'CDD', 'Addon'].map(n => ({n, c:C[n], d:r72.map(r => g(r, n))})));
+  }
+
+  let ir = inc.filter(r => r.Temporalidad === temp && r.Tipo === S.lvl && r.DIRECCION === S.name).sort((a, b) => a.Semana < b.Semana ? -1 : 1);
+  if (temp === 'DIARIA') ir = ir.slice(-period);
+  draw('cInc', {type:'bar', data:{labels:ir.map(r => fmtL(r.Semana)), datasets:INC.map(([n, c]) => ({label:n, data:ir.map(r => num(r[n]) || 0), backgroundColor:c}))},
+    options:{...base, scales:{x:{stacked:true, grid:{display:false}, ticks:{maxTicksLimit:14}}, y:{stacked:true, grid}},
+      plugins:{...base.plugins, tooltip:{callbacks:{footer:it => 'Total: ' + sum(it.map(i => i.parsed.y))}}}}});
+  const d = inc.filter(r => r.Temporalidad === 'DIARIA' && r.Tipo === S.lvl && r.DIRECCION === S.name).sort((a, b) => a.Semana < b.Semana ? -1 : 1);
+  const tot = r => r ? sum(INC.map(([n]) => num(r[n]) || 0)) : null;
+  k.push(kpi('Incumplimientos (' + (d.length ? fmtD(d[d.length - 1].Semana) : '—') + ')', tot(d[d.length - 1]), tot(d[d.length - 2]), '#B3263E'));
+  $('#kpis').innerHTML = k.join('');
+}
+
+async function rInc() {
+  const rs = await csv('Top10Incumplimientos.csv'), dir = $('#fDir').value || 'NACIONAL';
+  const a = rs.h[2], b = rs.h[3], mine = rs.filter(r => r.DIRECCION === dir);
+  const peor = mine.filter(r => r.Id === 'Peores').sort((x, y) => num(y.Diferencia) - num(x.Diferencia));
+  const mejor = mine.filter(r => r.Id === 'Mejores').sort((x, y) => num(x.Diferencia) - num(y.Diferencia));
+  const sem = ' (' + a.replace('Semana', 'semana ') + ' vs ' + b.replace('Semana', 'semana ') + ')';
+  $('#tPeor').textContent = 'Mayor incremento de incumplimiento'; $('#sPeor').textContent = 'Top ' + peor.length + ' distritos' + sem;
+  $('#tMejor').textContent = 'Mayor decremento de incumplimiento'; $('#sMejor').textContent = 'Top ' + mejor.length + ' distritos' + sem;
+  compareH('cPeor', peor, a, b, '#B3263E'); compareH('cMejor', mejor, a, b, '#1E7F4F');
+}
+
+async function rTop() {
+  const dir = $('#fDir').value || 'NACIONAL', nat = dir === 'NACIONAL', n = nat ? 20 : 15;
+  const [bl, ti] = await Promise.all([csv(nat ? 'TopDistrito.csv' : 'TopDirDistritos.csv'), csv('TopIncumplimientos.csv')]);
+  const f = ['Instalaciones', 'Addon', 'CDE', 'CDD', 'Soportes', 'Recolecciones'];
+  $('#tTB').textContent = 'Top ' + n + ' distritos con más backlog'; $('#sTB').textContent = 'Actualización: ' + (lastBL ? fmtD(lastBL) : '');
+  $('#tTI').textContent = 'Top ' + n + ' con más incumplimientos'; $('#sTI').textContent = 'Actualización: ' + (lastInc ? fmtD(lastInc) : '');
+  stackH('cTB', nat ? bl : bl.filter(r => r.DIRECCION === dir), 'DISTRITO', f, f.map(x => C[x]), n);
+  stackH('cTI', ti.filter(r => r.Tipo === dir), 'DIRECCION', INC.map(x => x[0]), INC.map(x => x[1]), n);
+}
+
+async function render() {
+  const m = $('#main'); m.classList.add('busy'); $('#err').hidden = true;
+  const S = scope(), path = [$('#fDir').value || 'NACIONAL', $('#fReg').value, $('#fPla').value, $('#fDis').value].filter(Boolean);
+  const nm = view === 'ind' ? S.name : ($('#fDir').value || 'NACIONAL');
+  $('#scopeT').textContent = nm.charAt(0) + nm.slice(1).toLowerCase();
+  $('#scopeS').textContent = view === 'ind' && S.lvl !== 'NACIONAL' ? path.join(' › ') : '';
+  try { await ({ind:rInd, inc:rInc, top:rTop})[view](); }
+  catch (e) { $('#err').hidden = false; $('#err').textContent = e.message + '. Si abriste el archivo con doble clic, ejecútalo con un servidor local (python -m http.server) o publícalo en GitHub Pages.'; }
+  m.classList.remove('busy');
+}
+
+function setView(v) {
+  view = v;
+  document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
+  ['ind', 'inc', 'top'].forEach(x => $('#v-' + x).hidden = x !== v);
+  document.querySelectorAll('.lvl,.only-ind').forEach(e => e.hidden = v !== 'ind');
+  render();
+}
+
+async function init() {
+  try {
+    H = await csv('Direccion.csv');
+    fill($('#fDir'), uniq(H, 'DIRECCION'), 'NACIONAL');
+    ['#fReg', '#fPla', '#fDis'].forEach((s, i) => fill($(s), [], ['Todas', 'Todas', 'Todos'][i]));
+    const nat = await csv('Backlog_Nacional.csv'), inc = await csv('IncumplimientosFull.csv');
+    lastBL = nat.map(r => r.Fecha_Descarga).sort().pop();
+    lastInc = inc.filter(r => r.Temporalidad === 'DIARIA' && r.Tipo === 'NACIONAL').map(r => r.Semana).sort().pop();
+    $('#upd').textContent = 'Backlog al ' + fmtD(lastBL) + ' · Incumplimientos al ' + fmtD(lastInc);
+  } catch (e) { $('#err').hidden = false; $('#err').textContent = e.message; }
+  render();
+}
+
+$('#fDir').onchange = () => cascade('dir'); $('#fReg').onchange = () => cascade('reg');
+$('#fPla').onchange = () => cascade('pla'); $('#fDis').onchange = render;
+document.querySelectorAll('.tabs button').forEach(b => b.onclick = () => setView(b.dataset.v));
+$('#segP').onclick = e => { const b = e.target.closest('button'); if (!b) return; period = +b.dataset.p; document.querySelectorAll('#segP button').forEach(x => x.setAttribute('aria-pressed', x === b)); render(); };
+$('#segT').onclick = e => { const b = e.target.closest('button'); if (!b) return; temp = b.dataset.t; document.querySelectorAll('#segT button').forEach(x => x.setAttribute('aria-pressed', x === b)); render(); };
+init();
+</script>
 </body>
-
 </html>
